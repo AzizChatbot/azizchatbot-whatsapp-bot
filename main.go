@@ -14,9 +14,10 @@ import (
 	"go.mau.fi/whatsmeow/types/events"
 	waLog "go.mau.fi/whatsmeow/util/log"
 
+	_ "github.com/jackc/pgx/v5"
+	"github.com/joho/godotenv"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/mdp/qrterminal"
-	"github.com/joho/godotenv"
 
 	Handler "github.com/AzizChatbot/azizchatbot-whatsapp-bot/lib/msgHandler"
 )
@@ -43,7 +44,7 @@ func main() {
 	store.DeviceProps.PlatformType = waCompanionReg.DeviceProps_DESKTOP.Enum()
 
 	dbLog := waLog.Stdout("Database", "ERROR", true)
-	container, err := sqlstore.New("sqlite3", "file:aziz.db?_foreign_keys=on", dbLog)
+	container, err := sqlstore.New("pgx", os.Getenv("DB_URL")+"wadb", dbLog)
 	if err != nil {
 		panic(err)
 	}
