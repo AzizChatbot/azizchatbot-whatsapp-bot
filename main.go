@@ -14,9 +14,8 @@ import (
 	"go.mau.fi/whatsmeow/types/events"
 	waLog "go.mau.fi/whatsmeow/util/log"
 
-	_ "github.com/jackc/pgx/v5"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/joho/godotenv"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/mdp/qrterminal"
 
 	Handler "github.com/AzizChatbot/azizchatbot-whatsapp-bot/lib/msgHandler"
