@@ -43,7 +43,7 @@ func main() {
 	store.DeviceProps.PlatformType = waCompanionReg.DeviceProps_DESKTOP.Enum()
 
 	dbLog := waLog.Stdout("Database", "ERROR", true)
-	container, err := sqlstore.New("pgx", os.Getenv("DB_URL")+"wadb", dbLog)
+	container, err := sqlstore.New("pgx", os.Getenv("DB_URL"), dbLog)
 	if err != nil {
 		panic(err)
 	}
