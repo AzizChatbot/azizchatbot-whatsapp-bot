@@ -34,7 +34,7 @@ func Handle(client *whatsmeow.Client, messageEvent *events.Message) {
 		dailyKey := fmt.Sprintf("session:daily:%s:%s", userId, now.Format("20060102"))
 		exists, _ := redisClient.Exists(ctx, dailyKey).Result()
 		if exists > 0 {
-			sendReply(ctx, client, userId, "لقد قمت ببدء المحادثة اليوم بالفعل، حاول غداً مرة اخرى.")
+			sendReply(ctx, client, userId, "لقد قمت ببدء المحادثة اليوم بالفعل، حاول غداً مرة اخرى، او قم بأستخدام موقعنا https://aziz.chat")
 			return
 		}
 
@@ -57,7 +57,7 @@ func Handle(client *whatsmeow.Client, messageEvent *events.Message) {
 	if exists > 0 {
 		messageCount, _ := redisClient.HIncrBy(ctx, sessionKey, "count", 1).Result()
 		if messageCount > 3 {
-			sendReply(ctx, client, userId, "لقد تجاوزت الحد الأقصى لعدد الرسائل المسموح بها في هذه الجلسة، حاول غداً مرة اخرى.")
+			sendReply(ctx, client, userId, "لقد تجاوزت الحد الأقصى لعدد الرسائل المسموح بها في هذه الجلسة، حاول غداً مرة اخرى، او قم بأستخدام موقعنا https://aziz.chat")
 			redisClient.Del(ctx, sessionKey)
 			return
 		}
